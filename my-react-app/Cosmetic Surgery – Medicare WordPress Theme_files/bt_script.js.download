@@ -1,0 +1,238 @@
+(function () {
+    function throttle(func, limit) {
+        let lastFunc;
+        let lastRan;
+        return function () {
+            const context = this;
+            const args = arguments;
+            if (!lastRan) {
+                func.apply(context, args);
+                lastRan = Date.now();
+            } else {
+                clearTimeout(lastFunc);
+                lastFunc = setTimeout(function () {
+                    if ((Date.now() - lastRan) >= limit) {
+                        func.apply(context, args);
+                        lastRan = Date.now();
+                    }
+                }, limit - (Date.now() - lastRan));
+            }
+        };
+    }
+
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function injectModalStyle() {
+        // Create style element
+        const style = document.createElement('style');
+        style.textContent = `
+            #modalOverlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                z-index: 999999999;
+            }
+            #modalContent {
+                position: relative;
+                background: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            #modalImage {
+                max-width: 100%;
+                max-height: 80vh;
+            }
+            #closeButton {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: #111;
+                color: #fff;
+                border: none;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    function injectModalMarkup() {
+
+        const modalOverlay = document.createElement('div');
+        modalOverlay.id = 'modalOverlay';
+
+        const modalContent = document.createElement('div');
+        modalContent.id = 'modalContent';
+
+        const closeButton = document.createElement('button');
+        closeButton.id = 'closeButton';
+        closeButton.textContent = '×';
+
+        const modalImage = document.createElement('img');
+        modalImage.id = 'modalImage';
+        modalImage.src = 'https://bold-themes.com/gtm/assets/img_newsletter_opt.avif';
+        modalImage.alt = 'Newsletter subscription';
+
+        const formDiv = document.createElement('div');
+        formDiv.id = 'formDiv';
+        formDiv.innerHTML = `<div id="mc_embed_shell">
+      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+        #mc_embed_signup{background:#fff; false;clear:left; font:14px Helvetica,Arial,sans-serif; width: 740px;}
+        #mc_embed_signup_scroll { padding-left: 4%;}
+</style>
+<div id="mc_embed_signup">
+    <form action="https://bold-themes.us17.list-manage.com/subscribe/post?u=eef98da9d68ee6a0fdc184704&amp;id=0b02f1b9a3&amp;f_id=0046dfe3f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll">
+            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+            <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+        <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display: none;"></div>
+            <div class="response" id="mce-success-response" style="display: none;"></div>
+        </div>
+    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+        <input type="text" name="b_eef98da9d68ee6a0fdc184704_0b02f1b9a3" tabindex="-1" value="">
+    </div>
+        <div class="optionalParent">
+            <div class="clear foot">
+                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                <p style="margin: 0px auto;"><a href="http://eepurl.com/i4-EHs" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
+`
+
+        // Append elements
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(modalImage);
+        modalContent.appendChild(formDiv);
+        modalOverlay.appendChild(modalContent);
+        document.body.appendChild(modalOverlay);
+
+        // Event listeners
+        closeButton.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function (event) {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+    }
+
+    function injectButtonMarkup() {
+
+        const buttonContent = document.createElement('div');
+        buttonContent.id = 'buttonContent';
+
+        const buttonImage = document.createElement('img');
+        buttonImage.id = 'buttonImage';
+        buttonImage.src = 'https://bold-themes.com/gtm/assets/btn_cmnt_subscribe_opt.avif';
+        modalImage.alt = 'Newsletter subscription';
+
+        buttonContent.appendChild(buttonImage);
+        document.body.appendChild(buttonContent);
+
+        // Event listeners
+        buttonContent.addEventListener('click', function(event){
+            
+            showModal()
+
+            datalayer.push({
+                'event': 'popup_open',
+                'content': 'Newsletter'
+            });
+
+            triggered = true
+            setCookie(cookieName, 'true', 3);
+
+        });
+    }
+
+    function injectButtonStyle() {
+        // Create style element
+        const style = document.createElement('style');
+        style.textContent = `
+            #buttonContent {
+                position: fixed;
+                bottom: 0;
+                right: 10px;
+                z-index: 99999999;
+                cursor: pointer;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    function showModal() {
+        const modalOverlay = document.getElementById("modalOverlay")
+        modalOverlay.style.display = 'flex';
+    }
+
+    function closeModal() {
+        const modalOverlay = document.getElementById("modalOverlay")
+        modalOverlay.style.display = 'none';
+    }
+
+
+    let triggered = false
+    const cookieName = 'BTScriptCookie';
+    const datalayer = window.dataLayer || [];
+
+    //window.dataLayer = window.dataLayer || [];
+
+    if (window.innerWidth > 800) {
+        injectModalStyle()
+        injectButtonStyle()
+
+        injectModalMarkup()
+        injectButtonMarkup()
+    }
+
+    const handleScroll = throttle(function () {
+
+        const urlStartsWith = 'https://bold-themes.com/';
+
+        if (!triggered && window.scrollY >= 300) {
+
+            if (!getCookie(cookieName)) {
+
+                if (window.location.href.startsWith(urlStartsWith)) {
+
+                    showModal()
+
+                    datalayer.push({
+                        'event': 'popup_open',
+                        'content': 'Newsletter'
+                    });
+
+                    triggered = true
+                    setCookie(cookieName, 'true', 3);
+                }
+            }
+        }
+    }, 200); // Adjust the throttle limit, 200ms for this example
+    window.addEventListener('scroll', handleScroll);
+})();
