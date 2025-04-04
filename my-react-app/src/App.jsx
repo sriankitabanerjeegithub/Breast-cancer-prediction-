@@ -1,4 +1,5 @@
 import "./index.css";
+import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home.jsx";  
@@ -11,7 +12,9 @@ import HospitalSearch from "./components/HospitalSearch";  // ✅ Import Hospita
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Learning from "./pages/Learning";
-//import Todo from "./pages/Todo";
+import Todo from "./pages/todo.jsx";
+import { FaTasks } from "react-icons/fa";
+
 function App() {
     return (
         <Router>
@@ -29,7 +32,8 @@ function App() {
                  <Route path="/about" element={<About />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/learning" element={<Learning />} />
-             
+                <Route path="/todo" element={<Todo />} />
+
 
             </Routes>
         </Router>

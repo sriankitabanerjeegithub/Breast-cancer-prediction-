@@ -1,5 +1,5 @@
 
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -40,4 +40,130 @@
 
 .read-the-docs {
   color: #888;
+} */
+/* Positioning the Todo container to the right */
+/* Make the background color apply to the full screen */
+/* Make the background color apply to the full screen */
+body, html {
+  height:auto;
+  margin-top: 0.25rem;
+  padding: 0;
+  background-color:white; /* Change this color if needed */
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+} 
+
+/* Centering the todo container */
+.todo{
+  background: papayawhip;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 1000px; /* Adjust size if needed */
 }
+
+/* Container for input and button */
+.create-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Make input full-width */
+.create-form-input {
+  flex: 1; /* This will make the input take up remaining space */
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+/* Button styling */
+.create-form-button {
+  padding: 12px 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.create-form-button:hover {
+  background-color: #444;
+}
+/* Todo.css */
+
+/* Container */
+.todo-container {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.todo-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* No tasks message */
+.no-tasks {
+  font-size: 18px;
+  color: gray;
+  margin-top: 10px;
+}
+
+/* Task Items */
+.todo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Hover effect */
+.todo-item:hover {
+  transform: scale(1.05);
+}
+
+/* Task Text */
+.task-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #444;
+}
+.task-text.completed {
+  color: green;
+  text-decoration: line-through;
+  font-weight: bold;
+}
+
+.checkmark, .delete-icon {
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 0.2s;
+}
+
+.checkmark:hover, .delete-icon:hover {
+  transform: scale(1.2);
+}
+
+
+
