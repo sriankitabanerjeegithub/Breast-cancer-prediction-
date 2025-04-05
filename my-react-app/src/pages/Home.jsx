@@ -162,7 +162,7 @@ function Home() {
                     <div className="flex justify-center space-x-6 mt-4">
                         <Link to="/about" className="hover:text-pink-400">About Us</Link>
                         <Link to="/blog" className="hover:text-pink-400">Blog</Link>
-                        <Link to="/contact" className="hover:text-pink-400">Contact</Link>
+                        <Link to="/learning" className="hover:text-pink-400">Learning</Link>
                     </div>
                 </div>
             </footer>

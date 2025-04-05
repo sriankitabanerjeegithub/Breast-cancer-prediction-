@@ -52,6 +52,8 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center; 
+   height:100%;
+   width:100%;
 } 
 
 /* Centering the todo container */
@@ -165,5 +167,8 @@ body, html {
   transform: scale(1.2);
 }
 
-
+#root {
+  height: 100%;
+  width: 100%;
+}
 
