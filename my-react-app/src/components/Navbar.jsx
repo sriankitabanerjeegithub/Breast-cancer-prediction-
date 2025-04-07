@@ -42,7 +42,7 @@ function Navbar() {
                         <Link 
                             to="/" 
                             className="text-gray-700 text-lg font-semibold hover:text-pink-500 transition"
-                            onClick={() => navigate(0)}
+                            // onClick={() => navigate(0)}
                         >
                             Home
                         </Link>

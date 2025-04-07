@@ -14,9 +14,12 @@ import Blog from "./pages/Blog";
 import Learning from "./pages/Learning";
 import Todo from "./pages/todo.jsx";
 import { FaTasks } from "react-icons/fa";
-
+//import ScrollToTop from "./utils/ScrollToTop";
 function App() {
     return (
+        
+
+   
         <Router>
             
             <Routes>
@@ -37,6 +40,7 @@ function App() {
 
             </Routes>
         </Router>
+        
     );
 }
 
