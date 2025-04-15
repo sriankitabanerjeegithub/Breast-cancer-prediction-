@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
-
+import HospitalSearch from "../components/HospitalSearch";
+import Footer from "../components/Footer";
 
 
 function Home() {
@@ -13,7 +14,7 @@ function Home() {
             {/* Hero Section */}
             <div 
                 className="absolute top-0 left-0 h-screen w-screen bg-cover bg-center z-0 mt-30"
-                style={{ backgroundImage: "url('/positive.jpeg')" }}
+                style={{ backgroundImage: "url('/positive2.webp')" }}
             >
                 {/* Animated Heading - Coming from Left */}
                 <motion.h1  
@@ -73,14 +74,85 @@ function Home() {
             </div>
 
             {/* Image Section */}
-            <div className="relative w-full flex flex-col items-center py-6 bg-pink-100">
-                <div className="flex justify-center items-center gap-20 mt-10">
-                    <img src="image1.jpeg" alt="Health Awareness" className="w-[450px] h-[450px] object-cover rounded-lg shadow-lg"/>
-                    <img src="image5.png" alt="Medical Consultation" className="w-[450px] h-[450px] object-cover rounded-lg shadow-lg"/>
-                    <img src="image6.jpeg" alt="Cancer Detection" className="w-[450px] h-[450px] object-cover rounded-lg shadow-lg"/>
-                    <img src="image3.jpeg" alt="Health Awareness" className="w-[450px] h-[450px] object-cover rounded-lg shadow-lg"/>
-                </div>
-            </div>
+            {/* Image Section with Motion */}
+{/* Image Section with Left-to-Right Motion */}
+{/* Image Section with Continuous Left-to-Right Motion */}
+<div className="relative w-full flex flex-col items-center py-10 bg-cover bg-top bg-no-repeat"
+  style={{ backgroundImage: "url('/positive.jpeg')", filter: "contrast(1.2) brightness(1.1)",height:"900px" }}>
+  
+  <h2 className="text-4xl font-bold mb-8 italic">Our Visual Message</h2>
+
+  {/* Scrolling container */}
+  <motion.div
+    className="flex gap-10 w-max px-4"
+    animate={{ x: ["-100%", "100%"] }}
+    transition={{
+      duration: 30, // Slower scroll speed
+      repeat: Infinity,
+      repeatType: "loop",
+      ease: "linear"
+    }}
+  >
+    {/* First set of images */}
+    {[
+      { src: "image1.jpeg", alt: "Health Awareness" },
+      { src: "image5.png", alt: "Medical Consultation" },
+      { src: "image6.jpeg", alt: "Cancer Detection" },
+      { src: "image3.jpeg", alt: "Health Support" },
+    ].map((img, index) => (
+      <img
+        key={index}
+        src={img.src}
+        alt={img.alt}
+        className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl flex-shrink-0"
+      />
+    ))}
+
+    {/* Duplicate the images for seamless loop */}
+    {[
+      { src: "image1.jpeg", alt: "Health Awareness" },
+      { src: "image8.jpeg", alt: "Medical" },
+      { src: "image6.jpeg", alt: "Cancer Detection" },
+      { src: "image3.jpeg", alt: "Health Support" },
+    ].map((img, index) => (
+      <img
+        key={index + 100}
+        src={img.src}
+        alt={img.alt}
+        className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl flex-shrink-0"
+      />
+    ))}
+
+    {/* Additional duplicate images */}
+    {[
+      { src: "image5.png", alt: "Medical Consultation" },
+      { src: "image7.jpeg", alt: "Medical Consu" },
+      { src: "image9.jpeg", alt: "Cancer Detection" },
+      { src: "image10.jpeg", alt: "Health Support" },
+    ].map((img, index) => (
+      <img
+        key={index + 200}
+        src={img.src}
+        alt={img.alt}
+        className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl flex-shrink-0"
+      />
+    ))}
+  </motion.div>
+  
+  <p className=" text-white leading-relaxed text-2xl font-bold mt-60 ml-[35px] italic">
+    Through powerful imagery and motion, we aim to raise awareness, inspire action, and foster hope. 
+    Each photo tells a story of courage, care, and the unwavering support available in the fight against breast cancer. 
+    Our visual message is a reminder that early detection, community strength, and compassionate care can change lives.
+    
+    We believe that education and empathy go hand-in-hand. These visuals showcase not only the journey of those impacted by breast cancer, 
+    but also the strength of medical professionals, caregivers, and advocates who walk beside them every step of the way.
+    
+  
+  </p>
+
+
+
+</div>
 
  {/* Section BELOW the background image */}
  <div className="relative w-full mt-[5vh] flex flex-col items-center py-6">
@@ -93,7 +165,7 @@ function Home() {
                     </span>
                     , <span className="text-[#f707b3]">Your Priority</span>
                 </h2>
-                <p className="text-3xl text-black italic ml-[100] mt-10 font-light">
+                <p className="text-3xl text-black italic ml-[100px] mt-10 font-light">
                 Our Breast Cancer Prediction & Awareness<br />
                 Platform helps assess breast cancer risk<br /> 
                 by analyzing medical data and providing <br />
@@ -151,21 +223,12 @@ function Home() {
             {/* Login Button Below Testimonials */}
             <div className="flex justify-center mt-10">
                 <Link to="/signup" className="bg-pink-500 text-black text-xl font-bold py-3 px-6 rounded-lg shadow-md hover:bg-pink-600 transition duration-300">
-                    Login
+                  Start   Predict
                 </Link>
             </div>
 
 {/* Footer */}
-<footer className="bg-gray-900 text-white text-center py-6 mt-10">
-                <div className="max-w-6xl mx-auto px-4">
-                    <p className="text-lg">&copy; {new Date().getFullYear()} Herselfcare. All Rights Reserved.</p>
-                    <div className="flex justify-center space-x-6 mt-4">
-                        <Link to="/about" className="hover:text-pink-400">About Us</Link>
-                        <Link to="/blog" className="hover:text-pink-400">Blog</Link>
-                        <Link to="/learning" className="hover:text-pink-400">Learning</Link>
-                    </div>
-                </div>
-            </footer>
+<Footer/>
 
             
         </div>
