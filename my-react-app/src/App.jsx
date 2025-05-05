@@ -121,6 +121,7 @@
 // }
 
 // export default App;
+import DrAi from "./components/drai";
 import "./index.css";
 import "./App.css";
 import './i18n'; // This initializes your language setup
@@ -128,8 +129,8 @@ import './i18n'; // This initializes your language setup
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home.jsx";  
-import SignUp from "./pages/SignUp.jsx";
-import SignIn from "./pages/SignIn.jsx";
+// import SignUp from "./pages/SignUp.jsx";
+// import SignIn from "./pages/SignIn.jsx";
 import Dashboard from "./pages/Dashboard.jsx"; 
 import Predict from "./components/Predict";
 import ProtectedRoute from "./ProtectedRoute.jsx";
@@ -164,12 +165,13 @@ function App() {
       </select>
     </div> */}
       {/* Router with Routes */}
+      
       <Router>
         <div className="app">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
+            {/* <Route path="/signup" element={<SignUp />} /> */}
+            {/* <Route path="/signin" element={<SignIn />} /> */}
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/predict" element={<Predict />} />
             <Route path="/hospitals" element={<HospitalSearch />} />
@@ -177,9 +179,11 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/learning" element={<Learning />} />
             <Route path="/todo" element={<Todo />} />
+            <Route path="/drai" element={<DrAi />} />
           </Routes>
         </div>
       </Router>
+
     </div>
   );
 }

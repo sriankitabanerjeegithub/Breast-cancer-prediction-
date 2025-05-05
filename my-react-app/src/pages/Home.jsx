@@ -221,11 +221,7 @@ function Home() {
 
              
             {/* Login Button Below Testimonials */}
-            <div className="flex justify-center mt-10">
-                <Link to="/signup" className="bg-pink-500 text-black text-xl font-bold py-3 px-6 rounded-lg shadow-md hover:bg-pink-600 transition duration-300">
-                  Start   Predict
-                </Link>
-            </div>
+            
 
 {/* Footer */}
 <Footer/>

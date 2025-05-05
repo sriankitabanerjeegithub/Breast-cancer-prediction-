@@ -25,10 +25,10 @@ import { motion } from "framer-motion";
 const Dashboard = () => {
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        window.location.href = "/signin";
-    };
+    // const handleLogout = () => {
+    //     localStorage.removeItem("token");
+    //     window.location.href = "/signin";
+    // };
 
     return (
         <div className="h-screen w-full bg-gradient-to-r from-purple-300 via-purple-900 to-purple-800 flex items-center justify-center">
